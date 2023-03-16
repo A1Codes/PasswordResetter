@@ -1,7 +1,7 @@
 from selenium import webdriver
 from time import sleep
 
-from accounts import facebook, instagram
+from accounts import facebook, instagram, snapchat
 from selenium.webdriver.common.keys import Keys
 
 
@@ -10,6 +10,7 @@ class Reset:
         self.driver = webdriver.Chrome()
         self.open_fb()
         self.open_insta()
+        self.open_sc()
 
     def open_fb(self):
         self.driver.get("https://www.facebook.com/login/identify/?ctx=recover&ars=facebook_login&from_login_screen=0")
@@ -32,6 +33,14 @@ class Reset:
         sleep(1)
         input_field.send_keys(instagram)
         sleep(3)
+        input_field.send_keys(Keys.ENTER)
+    
+    def open_sc(self):
+        self.driver.get("https://accounts.snapchat.com/accounts/password_reset_request")
+        sleep(2)
+        self.driver.find_element('xpath','/html/body/div/div/main/div[2]/div/section/div/section/div[2]/div/div/div/div[3]/button[1]/span').click()
+        input_field = self.driver.find_element('xpath','/html/body/div/div/main/div[1]/div/div/div[3]/form/div[1]/input')
+        input_field.send_keys(snapchat)
         input_field.send_keys(Keys.ENTER)
 
 
